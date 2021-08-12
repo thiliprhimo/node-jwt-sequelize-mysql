@@ -25,22 +25,22 @@ checkUserOrEmailExisting = (req, res, next) => {
 
 checkRoleExisting = (req, res, next) => {
   if (req.body.roles) {
-    // for (singleRole in req.body.roles) {
-    //   if (!ROLES.includes(singleRole)) {
-    //     return res
-    //       .status(400)
-    //       .send({ message: "Sorry, " + singleRole + " doesn't exist!" });
-    //   }
-    // }
-
-    for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
-        res.status(400).send({
-          message: "Failed! Role does not exist = " + req.body.roles[i],
-        });
-        return;
+    for (singleRole of req.body.roles) {
+      if (!ROLES.includes(singleRole)) {
+        return res
+          .status(400)
+          .send({ message: "Sorry, role : " + singleRole + " doesn't exist!" });
       }
     }
+
+    // for (let i = 0; i < req.body.roles.length; i++) {
+    //   if (!ROLES.includes(req.body.roles[i])) {
+    //     res.status(400).send({
+    //       message: "Failed! Role does not exist = " + req.body.roles[i],
+    //     });
+    //     return;
+    //   }
+    // }
   }
 
   next();
