@@ -6,7 +6,7 @@ const config = require("../config/auth.config.js");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
-const Op = db.sequelize.Op;
+const Op = db.Sequelize.Op;
 
 exports.signup = (req, res) => {
   User.create({
@@ -67,14 +67,14 @@ exports.signin = (req, res) => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
-      });
 
-      res.status(200).send({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        accessToken: token,
-        roles: authorities,
+        res.status(200).send({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          accessToken: token,
+          roles: authorities,
+        });
       });
     })
     .catch((err) => {

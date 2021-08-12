@@ -12,7 +12,7 @@ exports.developerBoard = (req, res) => {
 
 exports.designerBoard = (req, res) => {
   res.status(200).send({
-    message: "Designer alone can access this system!",
+    message: "Designer can access this system!",
   });
 };
 
