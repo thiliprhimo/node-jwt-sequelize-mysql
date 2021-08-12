@@ -12,11 +12,23 @@ module.exports = (app) => {
     next();
   });
 
-  app.post("/api/test/all", controller.commonBoard);
+  app.get("/api/test/all", controller.commonBoard);
 
-  app.post("/api/test/developer", controller.developerBoard);
+  app.get(
+    "/api/test/designer",
+    [authenticateJWT.verifyToken],
+    controller.designerBoard
+  );
 
-  app.post("/api/test/designer", controller.designerBoard);
+  app.get(
+    "/api/test/developer",
+    [authenticateJWT.verifyToken, authenticateJWT.isDeveloper],
+    controller.developerBoard
+  );
 
-  app.post("/api/test/tester", controller.testerBoard);
+  app.get(
+    "/api/test/tester",
+    [authenticateJWT.verifyToken, authenticateJWT.isTester],
+    controller.testerBoard
+  );
 };
